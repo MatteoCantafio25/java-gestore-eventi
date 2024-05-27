@@ -9,7 +9,7 @@ public class Event implements Comparable<Event>{
     // Attributi
     private String title;
     private LocalDate date;
-    private int totalSeats;
+    private final int totalSeats;
     private int bookedSeats;
 
 
