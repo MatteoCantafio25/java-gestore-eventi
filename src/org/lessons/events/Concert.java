@@ -12,10 +12,10 @@ public class Concert extends Event{
     private BigDecimal price;
 
     // Costruttore
-    public Concert (String title, LocalDate date, int totalSeats, LocalTime hour, BigDecimal price) {
+    public Concert (String title, LocalDate date, int totalSeats, LocalTime hour, BigDecimal price) throws IllegalArgumentException {
         super(title, date, totalSeats);
         this.hour = hour;
-        this.price = price;
+        this.price = validatePrice(price);
     }
 
     // Metodi
@@ -32,7 +32,14 @@ public class Concert extends Event{
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price;
+        this.price = validatePrice(price);
+    }
+
+    private BigDecimal validatePrice(BigDecimal price) throws IllegalArgumentException{
+        if (price == null || price.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Price cant be null or negative");
+        }
+        return price;
     }
 
     @Override

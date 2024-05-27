@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class Event {
+public class Event{
 
     // Attributi
     private String title;
@@ -14,10 +14,10 @@ public class Event {
 
 
     // Costruttore
-    public Event (String title, LocalDate date, int totalSeats){
-        this.title = title;
+    public Event (String title, LocalDate date, int totalSeats) throws IllegalArgumentException{
+        this.title = validateTitle(title);
         this.date = validateDate(date);
-        this.totalSeats = totalSeats;
+        this.totalSeats = validateSeats(totalSeats);
         bookedSeats = 0;
     }
 
@@ -46,13 +46,26 @@ public class Event {
         bookedSeats -= seats;
     }
     
-    private LocalDate validateDate(LocalDate date){
+    private LocalDate validateDate(LocalDate date) throws IllegalArgumentException{
 
         if (date.isBefore(LocalDate.now())){
-            throw new IllegalArgumentException("Invalid date: " + date);
-        }else {
-            return date;
+            throw new IllegalArgumentException("Date expired : " + date);
         }
+        return date;
+    }
+
+    private String validateTitle(String title) throws IllegalArgumentException{
+        if (title == null || title.isEmpty()){
+            throw new IllegalArgumentException("Invalid title: " + title);
+        }
+        return title;
+    }
+
+    private int validateSeats(int seats) throws IllegalArgumentException{
+        if (seats <= 0){
+            throw new IllegalArgumentException("Invalid number of seats: " + seats);
+        }
+        return seats;
     }
 
     @Override
@@ -66,7 +79,7 @@ public class Event {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = validateTitle(title);
     }
 
     public LocalDate getDate() {
@@ -74,7 +87,7 @@ public class Event {
     }
 
     public void setDate(LocalDate date) {
-        this.date = date;
+        this.date = validateDate(date);
     }
 
     public int getTotalSeats() {
