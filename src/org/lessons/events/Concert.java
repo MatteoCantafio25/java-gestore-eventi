@@ -48,7 +48,7 @@ public class Concert extends Event{
     }
 
     private String formatPrice() {
-        return String.format("%,.2f €", price);
+        return String.format("%,.2f€", price);
     }
 
     private String formatDateTime(LocalDate date, LocalTime time) {

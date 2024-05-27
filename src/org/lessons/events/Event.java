@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class Event{
+public class Event implements Comparable<Event>{
 
     // Attributi
     private String title;
@@ -56,7 +56,7 @@ public class Event{
 
     private String validateTitle(String title) throws IllegalArgumentException{
         if (title == null || title.isEmpty()){
-            throw new IllegalArgumentException("Invalid title: " + title);
+            throw new IllegalArgumentException("Invalid title");
         }
         return title;
     }
@@ -96,5 +96,10 @@ public class Event{
 
     public int getBookedSeats() {
         return bookedSeats;
+    }
+
+    @Override
+    public int compareTo(Event other) {
+        return this.getDate().compareTo(other.getDate());
     }
 }
