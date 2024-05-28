@@ -51,7 +51,7 @@ public class Main {
 
                     event.bookSeats(bookChoice);
                 } else if (userChoice == 2){
-                    System.out.print("How many seats do you want to book? ");
+                    System.out.print("How many seats do you want to cancel? ");
                     cancelChoice = Integer.parseInt(scanner.nextLine());
 
                     event.cancelBoooking(cancelChoice);

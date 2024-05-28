@@ -30,6 +30,9 @@ public class Event implements Comparable<Event>{
         if (bookedSeats + seats > totalSeats){
             throw new IllegalArgumentException("Can't book this number of seats: " + seats);
         }
+        if (date.isBefore(LocalDate.now())){
+            throw new IllegalArgumentException("Invalid date: " + date);
+        }
         bookedSeats += seats;
     }
 
